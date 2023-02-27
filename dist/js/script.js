@@ -13,6 +13,8 @@ const todoTitle = document.querySelector('[name="title"]');
 const todoDetail = document.querySelector('[name="detail"]');
 const todoList = document.querySelector('.todo-list');
 const addedMsg = document.querySelector('.addedMsg');
+const formInputs = document.querySelectorAll('input');
+const formTextareas = document.querySelectorAll('textarea');
 let _doneBtn;
 let _undoBtn;
 let _deleteBtn;
@@ -145,10 +147,17 @@ addTodoForm === null || addTodoForm === void 0 ? void 0 : addTodoForm.addEventLi
     let date = new Date();
     let id = (new Date()).getTime();
     let status = false;
-    if (!title && !detail)
-        return addedMsg.innerHTML = `<span style="color: red">Title and Detail of Todo shouldn't be empty!</span>`;
-    else if (!title || !detail)
-        return addedMsg.innerHTML = `<span style="color: red">${!title ? 'Title' : 'Detail'} of Todo shouldn't be empty!</span>`;
+    const _prevTodos = yield GetTodos();
+    if (!title && !detail) {
+        addedMsg.innerHTML = `<span style="color: red">Title and Detail of Todo shouldn't be empty!</span>`;
+        DisplayTodos(_prevTodos || []);
+        return;
+    }
+    else if (!title || !detail) {
+        addedMsg.innerHTML = `<span style="color: red">${!title ? 'Title' : 'Detail'} of Todo shouldn't be empty!</span>`;
+        DisplayTodos(_prevTodos || []);
+        return;
+    }
     const _todoValues = { id, title, detail, date, status };
     const _addedTodo = yield AddTodo(_todoValues);
     todoDetail.value = '';
@@ -168,6 +177,18 @@ window.addEventListener('load', () => __awaiter(void 0, void 0, void 0, function
     DoneTodo();
     UndoTodo();
 }));
+formInputs === null || formInputs === void 0 ? void 0 : formInputs.forEach((formInput) => {
+    formInput.addEventListener('input', (e) => {
+        e.preventDefault();
+        addedMsg.innerHTML = '';
+    });
+});
+formTextareas === null || formTextareas === void 0 ? void 0 : formTextareas.forEach((formTextarea) => {
+    formTextarea.addEventListener('input', (e) => {
+        e.preventDefault();
+        addedMsg.innerHTML = '';
+    });
+});
 window.addEventListener('mousemove', () => {
     DeleteTodo();
     DoneTodo();

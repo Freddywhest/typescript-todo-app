@@ -124,6 +124,10 @@ textarea:focus{
     flex-direction: row;
 }
 
+.addedMsg{
+    margin-bottom: 10px;
+}
+
 button{
     padding: 6px;
     font-size: 1rem;

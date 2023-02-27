@@ -22,6 +22,9 @@ const todoTitle: HTMLInputElement | null = document.querySelector<HTMLInputEleme
 const todoDetail: HTMLInputElement | null = document.querySelector<HTMLInputElement>('[name="detail"]');
 const todoList: HTMLElement | null = document.querySelector<HTMLElement>('.todo-list');
 const addedMsg: HTMLElement | null = document.querySelector<HTMLElement>('.addedMsg');
+const formInputs: NodeListOf<HTMLInputElement> | null = document.querySelectorAll<HTMLInputElement>('input');
+const formTextareas: NodeListOf<HTMLTextAreaElement> | null = document.querySelectorAll<HTMLTextAreaElement>('textarea');
+
 
 let _doneBtn: NodeListOf<HTMLButtonElement> | null;
 let _undoBtn: NodeListOf<HTMLButtonElement> | null;
@@ -169,11 +172,17 @@ addTodoForm?.addEventListener('submit', async (e: Event) => {
     let date: Date = new Date();
     let id = (new Date()).getTime();
     let status: boolean = false;
+    const _prevTodos = await GetTodos();
 
-    if(!title && !detail)
-        return addedMsg!.innerHTML = `<span style="color: red">Title and Detail of Todo shouldn't be empty!</span>`;
-    else if(!title || !detail)
-        return addedMsg!.innerHTML = `<span style="color: red">${!title ? 'Title' : 'Detail'} of Todo shouldn't be empty!</span>`;
+    if(!title && !detail){
+        addedMsg!.innerHTML = `<span style="color: red">Title and Detail of Todo shouldn't be empty!</span>`;
+        DisplayTodos(_prevTodos || []);
+        return;
+    }else if(!title || !detail){
+        addedMsg!.innerHTML = `<span style="color: red">${!title ? 'Title' : 'Detail'} of Todo shouldn't be empty!</span>`;
+        DisplayTodos(_prevTodos || []);
+        return;
+    }
     
     const _todoValues: Todo = { id, title, detail, date, status };
     const _addedTodo = await AddTodo(_todoValues);
@@ -185,9 +194,8 @@ addTodoForm?.addEventListener('submit', async (e: Event) => {
         }), 5000)
 
         addedMsg!.innerHTML = `<span style="color: green">${_addedTodo?.message}</span>`;
-        
         const _updatedTodos = await GetTodos();
-        DisplayTodos(_updatedTodos || []);
+    DisplayTodos(_updatedTodos || []);
     
 })
 
@@ -200,6 +208,19 @@ window.addEventListener('load', async () : Promise<void> => {
     UndoTodo();
 });
 
+formInputs?.forEach((formInput) => {
+    formInput.addEventListener('input', (e: Event) => {
+        e.preventDefault();
+        addedMsg!.innerHTML = '';
+    });
+});
+
+formTextareas?.forEach((formTextarea) => {
+    formTextarea.addEventListener('input', (e: Event) => {
+        e.preventDefault();
+        addedMsg!.innerHTML = '';
+    });
+});
 
 window.addEventListener('mousemove', () => {
     DeleteTodo();
