@@ -1,0 +1,137 @@
+/* Fonts 
+font-family: 'Josefin Sans', sans-serif;
+font-family: 'Lobster Two', cursive;
+font-family: 'Roboto', sans-serif;
+font-family: 'Shantell Sans', cursive;
+*/
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Shantell Sans', cursive;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 25px;
+    background-color: rgb(243, 243, 243);
+}
+
+.form-control{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+label{
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+form{
+    width: 500px;
+    border-bottom: 1px dashed rgba(128, 128, 128, 0.562);
+    padding-bottom: 20px;
+
+}
+
+input{
+    padding: .45rem;
+    font-size: 1.2rem;
+    transition: padding-left .2s;
+    border-radius: 10px;
+    border: 1px solid rgba(128, 128, 128, 0.562);
+    background-color: transparent;
+}
+
+textarea{
+    padding: .45rem;
+    font-size: 1.2rem;
+    transition: padding-left .2s;
+    border-radius: 10px;
+    border: 1px solid rgba(128, 128, 128, 0.562);
+    resize: vertical;
+    background-color: transparent;
+}
+
+input:focus{
+    outline: none;
+    padding-left: 8px;
+}
+
+textarea:focus{
+    outline: none;
+    padding-left: 8px;
+}
+
+.todos{
+    margin-top: 20px;
+    font-size: 1.1rem;
+    padding: 20px;
+    border: 1px solid rgba(128, 128, 128, 0.562);
+    border-radius: 10px;
+    height: 500px;
+    width: 500px;
+    padding-bottom: 30px;
+    overflow: auto;
+}
+
+.todo-list{
+    list-style: none;
+}
+
+.todo-list li{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border-bottom: 2px dashed rgba(128, 128, 128, 0.562);
+}
+
+.todo-list li:last-child{
+    border-bottom: none;
+}
+
+.todo-list li span{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 350;
+    margin-bottom: 5px;
+}
+
+.todo-done {
+    text-decoration: line-through;
+}
+
+.todo-list .span{
+    display: flex;
+    flex-direction: column;
+}
+
+.todo-list b{
+    margin-right: 5px;
+}
+
+.todo-list .date{
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.9rem;
+    display: flex;
+    width: 100%;
+    align-items: end;
+    justify-content: end;
+    flex-direction: row;
+}
+
+button{
+    padding: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 8px;
+    border: 1px solid rgba(128, 128, 128, 0.562);
+    background-color: rgba(128, 128, 128, 0.562);
+    color: #000000;
+    font-weight: 500;
+}
+
