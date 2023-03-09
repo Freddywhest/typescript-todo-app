@@ -14,3 +14,8 @@ Todo list made with TypeScript, HTML and CSS
 1. HTML5
 2. CSS3
 3. TypeScript
+
+***Installation Guide***
+1. Clone or download this repository
+2. Open index.html file
+3. Enjoy the project 😊
